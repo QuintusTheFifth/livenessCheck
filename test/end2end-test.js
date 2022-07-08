@@ -30,7 +30,7 @@ describe("Inheritance", function () {
   it("a month passes, heir takes control of contract, sets new heir and withdraws", async function () {
     //advance 4 weeks
     advanceTime(2419200);
-    await inheritance.connect(addr1).setNewOwner(addr2.address);
+    await inheritance.connect(addr1).updateHeirToOwner(addr2.address);
     expect(await inheritance.owner()).to.equal(addr1.address);
     expect(await inheritance.heir()).to.equal(addr2.address);
     //withdraw funds
@@ -43,7 +43,7 @@ describe("Inheritance", function () {
 
   it("heir tries to become owner before month has passed", async function () {
     await expect(
-      inheritance.connect(addr2).setNewOwner(addr3.address)
+      inheritance.connect(addr2).updateHeirToOwner(addr3.address)
     ).to.be.revertedWith("Not enough time has passed");
   });
 });

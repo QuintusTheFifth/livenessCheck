@@ -33,16 +33,16 @@ describe("Inheritance", function () {
     );
   });
 
-  it("setNewOwner()", async function () {
-    await expect(inheritance.setNewOwner(addr1.address)).to.be.revertedWith(
+  it("updateHeirToOwner()", async function () {
+    await expect(inheritance.updateHeirToOwner(addr1.address)).to.be.revertedWith(
       "Not enough time has passed"
     );
     //advance 4 weeks
     advanceTime(2419200);
-    await expect(inheritance.setNewOwner(addr1.address)).to.be.revertedWith(
+    await expect(inheritance.updateHeirToOwner(addr1.address)).to.be.revertedWith(
       "Only heir can become the owner"
     );
-    await inheritance.connect(addr1).setNewOwner(addr2.address);
+    await inheritance.connect(addr1).updateHeirToOwner(addr2.address);
   });
 });
 
