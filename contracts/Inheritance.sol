@@ -9,6 +9,7 @@ contract Inheritance {
     event Transfer(address indexed from, uint256 amount);
 
     constructor(address _heir) {
+        require(_heir != address(0));
         owner = msg.sender;
         heir = _heir;
         timestamp = block.timestamp;
@@ -26,6 +27,7 @@ contract Inheritance {
             "Not enough time has passed"
         );
         require(msg.sender == heir, "Only heir can become the owner");
+        require(_newHeir != address(0), "New heir cannot be the zero address");
         owner = msg.sender;
         heir = _newHeir;
     }
