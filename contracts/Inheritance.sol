@@ -7,6 +7,12 @@ contract Inheritance {
     uint256 public timestamp;
 
     event Transfer(address indexed from, uint256 amount);
+    event Withdrawal(address indexed from, uint256 amount);
+    event NewOwner(
+        address indexed from,
+        address indexed to,
+        address indexed newHeir
+    );
 
     constructor(address _heir) {
         require(_heir != address(0));
@@ -19,6 +25,7 @@ contract Inheritance {
         require(msg.sender == owner, "Only the owner can withdraw");
         timestamp = block.timestamp;
         payable(msg.sender).transfer(_amount);
+        emit Withdrawal(msg.sender, _amount);
     }
 
     function updateHeirToOwner(address _newHeir) external {
@@ -28,6 +35,7 @@ contract Inheritance {
         );
         require(msg.sender == heir, "Only heir can become the owner");
         require(_newHeir != address(0), "New heir cannot be the zero address");
+        emit NewOwner(owner, msg.sender, _newHeir);
         owner = msg.sender;
         heir = _newHeir;
     }
