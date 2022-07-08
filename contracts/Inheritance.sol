@@ -2,9 +2,9 @@
 pragma solidity ^0.8.0;
 
 contract Inheritance {
-    address public owner;
-    address public heir;
-    uint256 public timestamp;
+    address private owner;
+    address private heir;
+    uint256 private timestamp;
 
     event Transfer(address indexed from, uint256 amount);
     event Withdrawal(address indexed from, uint256 amount);
