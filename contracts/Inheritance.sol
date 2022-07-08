@@ -15,13 +15,13 @@ contract Inheritance {
         timestamp = block.timestamp;
     }
 
-    function withdraw(uint256 _amount) public {
+    function withdraw(uint256 _amount) external {
         require(msg.sender == owner, "Only the owner can withdraw");
         timestamp = block.timestamp;
         payable(msg.sender).transfer(_amount);
     }
 
-    function updateHeirToOwner(address _newHeir) public {
+    function updateHeirToOwner(address _newHeir) external {
         require(
             block.timestamp > (timestamp + 4 weeks),
             "Not enough time has passed"
