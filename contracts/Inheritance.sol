@@ -8,7 +8,7 @@ pragma solidity 0.8.15;
 * if the owner does not withdraw ETH from the contract for more than 1 month an
 * heir can take control of the contract and designate a new heir.
 * It is possible for the owner to withdraw 0 ETH just to reset the one month counter.
- */
+*/
 contract Inheritance {
     // Events
     event Transfer(address indexed from, uint256 amount);
@@ -59,6 +59,7 @@ contract Inheritance {
         );
         require(msg.sender == heir, "Only heir can become the owner");
         require(_newHeir != address(0), "New heir cannot be the zero address");
+        timestamp = block.timestamp;
         emit NewOwner(owner, msg.sender, _newHeir);
         owner = msg.sender;
         heir = _newHeir;
